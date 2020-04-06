@@ -996,11 +996,15 @@ public class KMTEditorJava extends JFrame implements ItemListener, ChangeListene
 					kmtOffset=0x48;
 				}
 				if (kmtOffset==0x48) { //CAMERA
-					byteArr[kmtOffset+byteIndex] = (byte)(((byte)kmtData[i].cameraMode) & 0xFF);	kmtOffset++;
+					short shortVal = (short)kmtData[i].cameraMode;
+					byteArr[kmtOffset+byteIndex] = (byte)((shortVal >> 8) & 0xff);				kmtOffset++;
+					byteArr[kmtOffset+byteIndex] = (byte)(shortVal & 0xff);						kmtOffset++;
 					kmtOffset=0x50;
 				}
 				if (kmtOffset==0x50) { //Cannon flag (0 if no cannon)
-					byteArr[kmtOffset+byteIndex] = (byte)(((byte)kmtData[i].cannonFlag) & 0xFF);	kmtOffset++;
+					short shortVal = (short)kmtData[i].cannonFlag;
+					byteArr[kmtOffset+byteIndex] = (byte)((shortVal >> 8) & 0xff);				kmtOffset++;
+					byteArr[kmtOffset+byteIndex] = (byte)(shortVal & 0xff);						kmtOffset++;
 					kmtOffset=0x58;
 				}
 				if (kmtOffset==0x58) { //CPUS
